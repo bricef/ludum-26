@@ -133,3 +133,7 @@ clothing
 http://openclipart.org/detail/27684/simples-dress-by-laobc
 http://openclipart.org/detail/133729/high-heels-by-gnokii
 
+potato
+http://openclipart.org/detail/9136/fast-food-dishes-plate-by-gerald_g
+http://openclipart.org/detail/22370/potato-by-nicubunu
+
