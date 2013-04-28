@@ -11,15 +11,25 @@ class root.Scene
     @start = config.start
     @end = config.end
     @elem = $(elem)
+   
+    @score = 0
     
+    @max_score = @items.length * 1
+    @min_score = @items.length * -1
+
     @click = false
     $('<div id="images" />').appendTo(@elem)
-    $('<div id="haiku"><p>'+@start+'</p></div>').appendTo(@elem).delay(2000).fadeOut 3000, =>
-      $("#haiku").html("<p>"+@verses[0].verse+"</p>").fadeIn 2000, =>
-          do @render
-          $("#haiku").delay(4000).fadeOut 2000, =>
-            @click = true
-      
+    $('<div id="haiku"></div>').appendTo(@elem)
+    @begin()
+  
+  clickOn: () ->
+    console.log "click on"
+    @click = true
+
+  clickOff: () ->
+    console.log "click off"
+    @click = false
+
   render: () ->
     images = $("#images")
     images.empty()
@@ -31,17 +41,26 @@ class root.Scene
           .css("top", item.offset.y)
           .appendTo(images)
   
-  say: () ->
-    @click = false
-    if @haikus.length
-      $("#haiku").hide().html("<p>"+@haikus[0].haiku+"</p>").appendTo(@elem)
-      $("#haiku").fadeIn(2000).delay(4000).fadeOut 2000, =>
-        @click = true
-    else
-      $("#haiku").hide().html("<p>"+@end+"</p>").appendTo(@elem)
-      $("#haiku").fadeIn 3000, =>
-        @click = true
-    
+  begin: () ->
+    $("#haiku").html('<p>'+@start+'</p>').delay(2000).fadeOut 3000, =>
+      $("#haiku").html("<p>"+@verses[0].verse+"</p>").fadeIn 2000, =>
+          do @render
+          $("#haiku").delay(4000).fadeOut 2000, =>
+            @clickOn()
+
+  finish: () ->
+    # TODO: sort out endings based on score here.
+    $("#haiku").hide().html("<p>"+@end+"</p>").fadeIn(3000)
+  
+  showText: (msg, callback) ->
+    # TODO: Should accept multiple messages and display 
+    # them one after the other with a blank background in between.
+    @clickOff()
+    $("#haiku").hide().html("<p>"+msg+"</p>").fadeIn(500).delay(3000).fadeOut 2000 , =>
+      @clickOn()
+      if callback
+        callback()
+
   
   initem: (coord, item) ->
     initem = item.offset.x < coord.x \
@@ -51,11 +70,30 @@ class root.Scene
     initem
 
   next: (coord) ->
+    verse = @verses[0]
     if @click
-      for item in @items
+      for item in @items.slice(0).reverse()
         if @initem(coord, item)
-          @items = @items.slice(1)
-      @render()
-      @say()
+          console.log("coord found")
+          console.log item.id, verse.items
+          if verse.items[item.id]
+            # update score
+            @score = @score + verse.items[item.id].score
+            # remove item from item list
+            @items = @items.filter (it) -> it.id isnt item.id
+            # re-render the scene with the new item list
+            @render()
+            # show feedback
+            @showText(verse.items[item.id].feedback, () =>
+              # when feedback is shown, remove the verse
+              @verses = @verses.slice(1)
+              # show the next verse!
+              if @verses.length
+                @showText(@verses[0].verse)
+              else
+                @finish()
+            )
+          else
+            @showText("I wasn't ready to cut this out of my life just yet...")
 
   

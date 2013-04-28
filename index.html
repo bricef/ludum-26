@@ -100,17 +100,17 @@
         verses: [
           {
             verse:"*Sigh* I need to clear the <em>junk</em> out of this room...",
-            items: [
-              {id: "flowers", score: -1, feedback: "Who cares for this sentimental crap anyway."},
-              {id: "trash", score: 0, feedback: "Well, that looks much cleaner now."}
-            ]
+            items: {
+              "flowers": { score: -1, feedback: "Who cares for this sentimental crap anyway."},
+              "trash": { score: 0, feedback: "Well, that looks much cleaner now."}
+            }
           },
           {
             verse:"I bought you these for your birthday, but you haven't been around much to enjoy them...",
-            items: [
-              {id: "flowers", score: 1, feedback:"So I made sure to send you a bouquet at work."},
-              {id: "clothing", score: -1, feedack: "And you never seemed to like what I did to you while you wore them."}
-            ]
+            items: {
+              "flowers": { score: 1, feedback:"So I made sure to send you a bouquet at work."},
+              "clothing": { score: -1, feedack: "And you never seemed to like what I did to you while you wore them."}
+            }
           },
         ],
         start: "This is our story",
