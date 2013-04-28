@@ -6,17 +6,13 @@
   <script src="Client/js/Third-Party/jquery-1.7.2.min.js"></script>
   <script src="Client/js/Third-Party/soundmanager2/soundmanager2.js"></script>
   
+  <script src="game.js"></script>
+
 </head>
 <body>
 
-  <canvas id="testcanvas" height=0 width=0 > </canvas>
-  
+  <div id="main"></div>
   <script>
-
-    function succcess(msg){
-      console.log(msg);
-    }
-
   $(function(){
     //soundManager.useFastPolling = true;
     soundManager.setup({
@@ -40,7 +36,48 @@
         //soundManager.play("try")
       }
     });
+
+    var scene = new Scene(
+      {
+        base:"http://placehold.it/600x400", 
+        shots: [
+          {
+            haiku:"roses are red", 
+            offset: {x:10, y:10}, 
+            img: "http://placehold.it/50x50/990000", 
+            size: {x:50,y:50}
+          },
+          {
+            haiku:"violets are blue", 
+            offset: {x:100, y:100}, 
+            img: "http://placehold.it/50x50/000099", 
+            size: {x:50,y:50}
+          },
+          {
+            haiku:"I enjoy murdering puppies too...", 
+            offset: {x:300, y:200}, 
+            img: "http://placehold.it/50x50/000000", 
+            size: {x:50,y:50}
+          },
+        ],
+        start: "This was the start of something",
+        end: "Ferever less"
+      }
+    );
+
+    scene.render($("#main"))
+    
+    $("#main").click(function(event){
+      var os = $("#main").offset();
+      var coords = {x:event.pageX-os.left, y:event.pageY-os.top}
+      console.log(coords)
+      scene.next($("#main"), coords);
+      
+    });
+
+
   });
+  
   </script>
 
 
