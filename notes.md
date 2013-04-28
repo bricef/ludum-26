@@ -34,4 +34,5 @@ That we could have:
  * Handcuffs
  * Books
  * Picture on the wall
+ * hammer
 
