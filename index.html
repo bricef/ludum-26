@@ -103,36 +103,6 @@
             size: {x:100, y:100},
           },
           {
-            id: "bills",
-            offset: {x:150, y:320},
-            img: "Client/resources/bills.png",
-            size: {x:120, y:80},
-          },
-          {
-            id: "teddy",
-            offset: {x:120, y:320},
-            img: "Client/resources/teddy.png",
-            size: {x:70, y:80},
-          },
-          {
-            id: "knife", 
-            offset: {x:150, y:320},
-            img: "Client/resources/knife.png",
-            size: {x:64, y:64},
-          },
-          {
-            id: "housekey",
-            offset: {x:200, y:320},
-            img: "Client/resources/housekey.png",
-            size: {x:48,y:48},
-          },
-          {
-            id: "vacuum",
-            offset: {x:250, y:330},
-            img: "Client/resources/vacuum.png",
-            size: {x:168, y:80},
-          },
-          {
             id: "bed", 
             offset: {x:0, y:300},
             img: "Client/resources/bed.png",
@@ -156,7 +126,7 @@
               "wrecking": { score: -1, feedback: "I never understood your attachment to that toy." },
             }
           },
-          {
+ /*         {
             verse:"I gave this to you.<br/>So busy, you have had no<br/>Time to enjoy it.",
             items: {
               "books": {score: 0, feedback: "I suppose it's the thought that counts."},
@@ -211,7 +181,7 @@
               "trash":{score:-1, feedback:"Until I hit the bar and got trashed."},
               "handcuffs":{score:-1, feedback:"\"Until death do we part.\""},
             }
-          },
+          }, */
           {
             verse: "Lately you became<br/>Anxious that we would lose what<br/>We made together.",
             items:{
@@ -222,31 +192,42 @@
               "trophy":{score:0, feedback:"You were always the best..."},
             },
           },
-          {
-            verse: "Here, I'm restless.<br/>Here, I may sleep no more.<br/>I must leave this place.",
-            items:{
-              "bed": {score:0, feedback:"TBD"},
-            },
-          }
         ],
         start: "This is our story",
+        end: {
+          verse: "Here, I'm restless.<br/>Here, I may sleep no more.<br/>I must leave this place.",
+          item: "bed"
+        },
         endings:[
-          {text: "I already look forward to our time together with our new arrival. What a family we'll make!", item:"teddy"},
-          {text: "We're happy together, and our story isn't over. We're even moving into a new place together.", item:"housekeys"},
-          {text: "I'm glad I did that, this room really needed a clean.", item:"vacuum"},
-          {text: "I miss you. <br /> Without you, without a job, I'm not sure I can cope anymore...", item:"bills"},
-          {text: "They'll never find your body.", item:"knife"},
+          {
+            text: "I already look forward to our time together with our new arrival. What a family we'll make!",
+            offset: {x:120, y:320},
+            img: "Client/resources/teddy.png"
+          },
+          {
+            text: "We're happy together, and our story isn't over. We've even found a place to call our own.", 
+            offset: {x:200, y:320},
+            img: "Client/resources/housekey.png"
+          },
+          {
+            text: "I'm glad I did that, this room really needed a clean.",
+            offset: {x:250, y:330},
+            img: "Client/resources/vacuum.png"
+          },
+          {
+            text: "I miss you. <br /> Without you, without a job, I'm not sure I can cope anymore...",
+            offset: {x:150, y:320},
+            img: "Client/resources/bills.png" 
+          },
+          {
+            text: "They'll never find your body.", 
+            offset: {x:150, y:320},
+            img: "Client/resources/knife.png"
+          },
         ],
-        credits: '<h3>The End </h3>Thankyou for playing <em>Less</em>.<br /><em>Less</em> was lovingly crafted by <a href="http://twitter.com/tcoxton">Tom Coxton</a> and <a href="http://twitter.com/fractallambda">Brice Fernandes</a>'
-
-
+        credits: 'Thankyou for playing <em>Less</em>.<br /><br />You have just experienced one of five alternative endings, <a href="#" onclick="location.reload()">play again</a> to experience the others.<br /><br /><em>Less</em> was lovingly crafted by <a href="http://twitter.com/tccoxon" onclick="location.reload()">Tom Coxon</a> and <a href="http://twitter.com/fractallambda" onclick="location.reload()">Brice Fernandes</a><br /><br /> '
       }
     );
-
-    
-    
-
-
   });
   
   </script>
