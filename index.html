@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="Client/static/welcome.less" rel="stylesheet/less" type="text/css" /> 
+  <script src="Client/js/Third-Party/less-1.3.0.min.js"></script>
+  <script src="Client/js/Third-Party/jquery-1.7.2.min.js"></script>
+  <script src="Client/js/Third-Party/soundmanager2/soundmanager2.js"></script>
+  
+</head>
+<body>
+
+  <canvas id="testcanvas" height=0 width=0 > </canvas>
+  
+  <script>
+
+    function succcess(msg){
+      console.log(msg);
+    }
+
+  $(function(){
+    //soundManager.useFastPolling = true;
+    soundManager.setup({
+      url: 'Client/js/Third-Party/soundmanager2/swf',
+      useHighPerformance:true,
+      flashVersion: 9,
+      ontimeout: function(){ console.log("Sound manager failed to load."); },
+      onready: function(){
+        window.sound = soundManager.createSound({
+          id : "try",
+          url: 'Client/resources/short-news-jingle.mp3',
+          autoLoad:true,
+          autoPlay: false,
+          multishot:false,
+          volume:50,
+          loops:1,
+          onload:function(){
+            console.log("Sound manager loaded sound successfully.");
+          },
+        });
+        //soundManager.play("try")
+      }
+    });
+  });
+  </script>
+
+
+</body>
+</html>
