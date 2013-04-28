@@ -87,6 +87,7 @@ class root.Scene
     coords = {x:event.pageX-os.left, y:event.pageY-os.top}
     if @click and @initem(coords, bed)
       @clickOff()
+      @elem.unbind()
       console.log "clicked on bed!!"
       # remove bed from pictures, add ending picture to picture stack, remove handcuffs
       @items = (item for item in @items when (item.id isnt bed.id) and (item.id isnt "handcuffs") )
@@ -98,11 +99,11 @@ class root.Scene
           .css("top", ending.offset.y)
           .appendTo(images)
           # grow item to fil page
-          .delay(1000)
+          .delay(500)
           .animate({width:"60%", top:"50px"}, 1000).animate({opacity:0.3},1000)
-      $('#bscreen').delay(1000).fadeIn(1000)
+      $('#bscreen').delay(500).fadeIn(1000)
       # fade in final verse
-      $('#haiku').delay(1000).html('<p class="cbox">'+ending.text+'</p>').delay(1000).fadeIn(1000).delay(3000).fadeOut 1000, =>
+      $('#haiku').delay(500).html('<p class="cbox">'+ending.text+'</p>').delay(1000).fadeIn(1000).delay(5000).fadeOut 1000, =>
         $("#haiku").html('<p class="cbox credits">'+@credits+'</p>').fadeIn(1000)
       # delay 
       # show credits
@@ -131,8 +132,8 @@ class root.Scene
     # TODO: Should accept multiple messages and display 
     # them one after the other with a blank background in between.
     @clickOff()
-    $("#bscreen").fadeIn(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay)
-    $("#haiku").hide().html('<p class="cbox">'+msg+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay , =>
+    $("#bscreen").fadeIn(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay/2)
+    $("#haiku").hide().html('<p class="cbox">'+msg+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay/2 , =>
       @clickOn()
       if callback
         callback()
@@ -177,8 +178,10 @@ class root.Scene
                 @verses = @verses.slice(1)
             else
               @finish(verse.items[item.id].feedback)
-
+            break
           else
             @showText("I'm not ready to cut this out of my life just yet...")
+        else
+          @clickOn()
 
   
