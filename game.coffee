@@ -49,8 +49,6 @@ class root.Scene
     and coord.x < (haiku.offset.x+haiku.size.x) \
     and haiku.offset.y < coord.y \
     and coord.y < (haiku.offset.y+haiku.size.y)
-    
-    console.log inhaiku
     inhaiku
 
   next: (coord) ->
@@ -60,16 +58,4 @@ class root.Scene
       @render()
       @say()
 
-
-
-class root.Story
-  constructor: (@element) ->
-    @scenes = []
-
-  addScene: (scene) ->
-    @scenes.push scene
-
-  next: (coord) ->
-    @scenes[0].next(@element)
- 
   
