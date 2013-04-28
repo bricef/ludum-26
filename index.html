@@ -40,7 +40,7 @@
     var scene = new Scene(
       $("#main"),
       {
-        base:"http://placehold.it/600x400", 
+        base:"/Client/resources/scene-bg.png", 
         shots: [
           {
             haiku:"roses are red", 
@@ -70,7 +70,7 @@
     $("#main").click(function(event){
       var os = $("#main").offset();
       var coords = {x:event.pageX-os.left, y:event.pageY-os.top}
-      scene.next($("#main"), coords);
+      scene.next(coords);
       
     });
 

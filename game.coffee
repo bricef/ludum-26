@@ -8,9 +8,13 @@ class root.Scene
     @start = config.start
     @end = config.end
     @elem = $(elem)
-    @render()
+    @render
     $('<div id="haiku">'+@start+'</div>').appendTo(@elem)
-    $("#haiku").delay(3000).fadeOut(4000).queue(() -> @say)
+    $("#haiku").delay(2000).fadeOut 3000, =>
+      if @haikus.length
+        $('<div id="haiku">'+@haikus[0].haiku+'</div>').hide().appendTo(@elem)
+        $("#haiku").fadeIn(3000).delay 3000, =>
+          @next {x:0, y:0}
       
     
     
@@ -27,8 +31,8 @@ class root.Scene
   
   say: () ->
     if @haikus.length
-      $('<div id="haiku">'+@haikus[0].haiku+'</div>').appendTo(@elem)
-      $("#haiku").fadeOut(4000)
+      $('<div id="haiku">'+@haikus[0].haiku+'</div>').hide().appendTo(@elem)
+      $("#haiku").fadeIn(2000).delay(2000).fadeOut(2000)
     else
       $('<div id="haiku">'+@end+'</div>').hide().appendTo(@elem)
       $("#haiku").fadeIn(3000)
@@ -45,10 +49,10 @@ class root.Scene
     console.log inhaiku
     inhaiku
 
-  next: (elem, coord) ->
+  next: (coord) ->
     if @inhaiku(coord, @haikus[0])
       @haikus = @haikus.slice(1)
-    @render(elem)
+    @render()
     @say()
 
 
