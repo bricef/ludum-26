@@ -152,3 +152,7 @@ http://openclipart.org/detail/27101/crane-by-maxim2
 books
 http://openclipart.org/detail/19843/books-by-emyller
 
+handcuffs
+http://openclipart.org/detail/19309/handcuffs-by-radacina
+
+
