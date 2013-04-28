@@ -1,6 +1,18 @@
 
 root = exports ? this
 
+DEBUG = true
+
+if not DEBUG
+  fadein_delay = 500
+  fadeout_delay = 2000
+  wait_delay = 2000
+else
+  fadein_delay = 500
+  fadeout_delay = 500
+  wait_delay = 500
+
+
 class root.Scene
   constructor: (elem, config) ->
     @verses = config.verses
@@ -23,7 +35,13 @@ class root.Scene
     $('<div id="haiku"></div>').appendTo(@elem)
     $("#bscreen").hide()
     @begin()
-  
+    
+    @elem.click (event) =>
+      os = @elem.offset()
+      coords = {x:event.pageX-os.left, y:event.pageY-os.top}
+      @next(coords)
+      null
+      
   clickOn: () ->
     console.log "click on"
     @click = true
@@ -44,24 +62,23 @@ class root.Scene
           .appendTo(images)
   
   begin: () ->
-    $("#haiku").html('<p class="cbox">'+@start+'</p>').delay(2000).fadeOut 3000, =>
-      $("#haiku").html('<p class="cbox">'+@verses[0].verse+"</p>").fadeIn 2000, =>
+    $("#haiku").html('<p class="cbox">'+@start+'</p>').delay(wait_delay).fadeOut fadeout_delay, =>
+      $("#haiku").html('<p class="cbox">'+@verses[0].verse+"</p>").fadeIn fadein_delay, =>
           do @render
-          $("#haiku").delay(4000).fadeOut 2000, =>
+          $("#haiku").delay(wait_delay).fadeOut fadeout_delay, =>
             @clickOn()
 
-  finish: () ->
+  finish: (feedback) ->
     @clickOff()
+    console.log "FEEDBACK: ", feedback
     screen = $("#bscreen")
     haiku = $("#haiku")
     # start by displaying the feedback from the last verse
-    screen.fadeIn(500).delay(3000).delay(2000).delay(500).delay(3000).fadeOut(2000)
-    haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
-      haiku.html('<p class="cbox">'+newverse+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
+    screen.fadeIn(fadein_delay).delay(wait_delay).delay(fadeout_delay).delay(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay)
+    haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
+      haiku.html('<p class="cbox">'+"TEST VERSE"+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
+        console.log ""
         @clickOn()
-        if callback
-          callback()
-    $("#haiku").html('<p class="cbox">'+@verses[0].verse+'</p>')
 
     # now the feedback has been shown begin the end sequence, with "I can't sleep here".
     
@@ -81,7 +98,7 @@ class root.Scene
     else if @score > 0 #good
       end = @endings[1].text
       pic = @endings[1].img
-    $("#haiku").hide().html('<p class="cbox">'+end+'</p><img src="'+pic+'" />').fadeIn(3000)
+    #$("#haiku").hide().html('<p class="cbox">'+end+'</p><!--<img src="'+pic+'" />-->').fadeIn(3000)
   
   showText: (msg, callback) ->
     # TODO: Should accept multiple messages and display 
@@ -105,9 +122,9 @@ class root.Scene
     screen = $("#bscreen")
     haiku = $("#haiku")
     @clickOff()
-    screen.fadeIn(500).delay(3000).delay(2000).delay(500).delay(3000).fadeOut(2000)
-    haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
-      haiku.html('<p class="cbox">'+newverse+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
+    screen.fadeIn(fadein_delay).delay(wait_delay).delay(fadeout_delay).delay(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay)
+    haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
+      haiku.html('<p class="cbox">'+newverse+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
         @clickOn()
         if callback
           callback()
@@ -116,6 +133,7 @@ class root.Scene
   next: (coord) ->
     verse = @verses[0]
     if @click
+      @clickOff()
       for item in @items.slice(0).reverse()
         if @initem(coord, item)
           console.log("coord found")
@@ -133,7 +151,7 @@ class root.Scene
               @showTexts verse.items[item.id].feedback, @verses[1].verse, () =>
                 @verses = @verses.slice(1)
             else
-              @finish()
+              @finish(verse.items[item.id].feedback)
 
           else
             @showText("I'm not ready to cut this out of my life just yet...")
