@@ -73,7 +73,7 @@ class root.Scene
     # TODO: Should accept multiple messages and display 
     # them one after the other with a blank background in between.
     @clickOff()
-    $("#haiku").hide().html('<p class="cbox">'+msg+"</p>").fadeIn(500).delay(3000).fadeOut 2000 , =>
+    $("#haiku").hide().html('<p class="cbox">'+msg+"</p>").fadeIn(500).delay(1000).fadeOut 1000 , =>
       @clickOn()
       if callback
         callback()
