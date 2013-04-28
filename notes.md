@@ -127,3 +127,9 @@ I'm sorry I'm sorry I'm sorry I'm sorry I'm sorry I'm sorry I'm sorry
 knife
 
 
+## Image sources
+
+clothing
+http://openclipart.org/detail/27684/simples-dress-by-laobc
+http://openclipart.org/detail/133729/high-heels-by-gnokii
+
