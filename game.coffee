@@ -1,7 +1,7 @@
 
 root = exports ? this
 
-DEBUG = true
+DEBUG = false
 
 if not DEBUG
   fadein_delay = 500
