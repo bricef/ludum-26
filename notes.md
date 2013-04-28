@@ -157,3 +157,7 @@ http://openclipart.org/detail/19309/handcuffs-by-radacina
 
 hammer
 http://openclipart.org/detail/2556/hammer-4-by-machovka
+
+typewriter
+http://openclipart.org/detail/171485/typewriter-by-andinuryadin-171485
+
