@@ -9,17 +9,14 @@ class root.Scene
     @end = config.end
     @elem = $(elem)
     @render
-    $('<div id="haiku">'+@start+'</div>').appendTo(@elem)
+    $('<div id="haiku"><p>'+@start+'</p></div>').appendTo(@elem)
     $('<div id="images" />').appendTo(@elem)
     $("#haiku").delay(2000).fadeOut 3000, =>
       if @haikus.length
-        $("#haiku").html(@haikus[0].haiku).fadeIn 2000, =>
+        $("#haiku").html("<p>"+@haikus[0].haiku+"</p>").fadeIn 2000, =>
           do @render
           $("#haiku").delay(2000).fadeOut(2000)
       
-    
-    
- 
   render: () ->
     images = $("#images")
     images.empty()
@@ -33,10 +30,10 @@ class root.Scene
   
   say: () ->
     if @haikus.length
-      $("#haiku").hide().html(@haikus[0].haiku).appendTo(@elem)
+      $("#haiku").hide().html("<p>"+@haikus[0].haiku+"</p>").appendTo(@elem)
       $("#haiku").fadeIn(2000).delay(2000).fadeOut(2000)
     else
-      $("#haiku").hide().html(@end).appendTo(@elem)
+      $("#haiku").hide().html("<p>"+@end+"</p>").appendTo(@elem)
       $("#haiku").fadeIn(3000)
     
   

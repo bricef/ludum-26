@@ -76,6 +76,7 @@
 /*
  * Actual style
  */
+@import "http://fonts.googleapis.com/css?family=Meie+Script";
 
 body {
   .pack;
@@ -112,14 +113,20 @@ h1 {
   #haiku {
     z-index:10;
     position: absolute;
+    display:table;
     top:0px;
     bottom:0px;
     right:0px;
     left:0px;
-    margin:auto;
     width:600px;
     height:400px;
     background:rgba(1,1,1,1);
+    font-family:"Meie Script";
+    font-size:300%;
+    p{
+      display:table-cell;
+      vertical-align:middle;
+    }
   }
   #base{
     position: relative;
