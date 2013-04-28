@@ -142,3 +142,10 @@ http://openclipart.org/detail/117241/golden-ring-by-truecryer
 
 trash
 http://openclipart.org/detail/172765/blue-plastic-box-filled-with-paper-by-qubodup-172765
+
+trophy
+http://openclipart.org/detail/48937/trophy-by-sheikh_tuhin
+
+wrecking
+http://openclipart.org/detail/27101/crane-by-maxim2
+
