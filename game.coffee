@@ -16,7 +16,7 @@ class root.Scene
       if @haikus.length
         $("#haiku").html("<p>"+@haikus[0].haiku+"</p>").fadeIn 2000, =>
           do @render
-          $("#haiku").delay(2000).fadeOut 2000, =>
+          $("#haiku").delay(4000).fadeOut 2000, =>
             @click = true
       
   render: () ->
@@ -34,7 +34,7 @@ class root.Scene
     @click = false
     if @haikus.length
       $("#haiku").hide().html("<p>"+@haikus[0].haiku+"</p>").appendTo(@elem)
-      $("#haiku").fadeIn(2000).delay(2000).fadeOut 2000, =>
+      $("#haiku").fadeIn(2000).delay(4000).fadeOut 2000, =>
         @click = true
     else
       $("#haiku").hide().html("<p>"+@end+"</p>").appendTo(@elem)
