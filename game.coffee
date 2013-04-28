@@ -131,6 +131,6 @@ class root.Scene
 #                @finish()
 #            )
           else
-            @showText("I wasn't ready to cut this out of my life just yet...")
+            @showText("I'm not ready to cut this out of my life just yet...")
 
   
