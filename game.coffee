@@ -10,31 +10,33 @@ class root.Scene
     @elem = $(elem)
     @render
     $('<div id="haiku">'+@start+'</div>').appendTo(@elem)
+    $('<div id="images" />').appendTo(@elem)
     $("#haiku").delay(2000).fadeOut 3000, =>
       if @haikus.length
-        $('<div id="haiku">'+@haikus[0].haiku+'</div>').hide().appendTo(@elem)
-        $("#haiku").fadeIn(3000).delay 3000, =>
-          @next {x:0, y:0}
+        $("#haiku").html(@haikus[0].haiku).fadeIn 2000, =>
+          do @render
+          $("#haiku").delay(2000).fadeOut(2000)
       
     
     
  
   render: () ->
-    @elem.html("")
-    $('<img />').attr({id: "base", src: @basepic}).appendTo(@elem)
+    images = $("#images")
+    images.empty()
+    $('<img />').attr({id: "base", src: @basepic, class:"disp"}).appendTo(images)
     if @haikus.length
       for haiku in @haikus
-        $('<img />').attr({src: haiku.img})
+        $('<img />').attr({src: haiku.img, class:"disp"})
           .css("left", haiku.offset.x)
           .css("top", haiku.offset.y)
-          .appendTo(@elem)
+          .appendTo(images)
   
   say: () ->
     if @haikus.length
-      $('<div id="haiku">'+@haikus[0].haiku+'</div>').hide().appendTo(@elem)
+      $("#haiku").hide().html(@haikus[0].haiku).appendTo(@elem)
       $("#haiku").fadeIn(2000).delay(2000).fadeOut(2000)
     else
-      $('<div id="haiku">'+@end+'</div>').hide().appendTo(@elem)
+      $("#haiku").hide().html(@end).appendTo(@elem)
       $("#haiku").fadeIn(3000)
     
   
