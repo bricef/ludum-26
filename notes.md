@@ -161,3 +161,6 @@ http://openclipart.org/detail/2556/hammer-4-by-machovka
 typewriter
 http://openclipart.org/detail/171485/typewriter-by-andinuryadin-171485
 
+teddy
+http://openclipart.org/detail/49009/simple-teddy-bear-with-bowtie-by-gerald_g
+
