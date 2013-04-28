@@ -38,6 +38,7 @@
     });
 
     var scene = new Scene(
+      $("#main"),
       {
         base:"http://placehold.it/600x400", 
         shots: [
@@ -61,16 +62,14 @@
           },
         ],
         start: "This was the start of something",
-        end: "Ferever less"
+        end: "Thankyou for playing less..."
       }
     );
 
-    scene.render($("#main"))
     
     $("#main").click(function(event){
       var os = $("#main").offset();
       var coords = {x:event.pageX-os.left, y:event.pageY-os.top}
-      console.log(coords)
       scene.next($("#main"), coords);
       
     });
