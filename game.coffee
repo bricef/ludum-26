@@ -8,6 +8,7 @@ class root.Scene
     @start = config.start
     @end = config.end
     @elem = $(elem)
+    @click = false
     @render
     $('<div id="haiku"><p>'+@start+'</p></div>').appendTo(@elem)
     $('<div id="images" />').appendTo(@elem)
@@ -15,7 +16,8 @@ class root.Scene
       if @haikus.length
         $("#haiku").html("<p>"+@haikus[0].haiku+"</p>").fadeIn 2000, =>
           do @render
-          $("#haiku").delay(2000).fadeOut(2000)
+          $("#haiku").delay(2000).fadeOut 2000, =>
+            @click = true
       
   render: () ->
     images = $("#images")
@@ -29,12 +31,15 @@ class root.Scene
           .appendTo(images)
   
   say: () ->
+    @click = false
     if @haikus.length
       $("#haiku").hide().html("<p>"+@haikus[0].haiku+"</p>").appendTo(@elem)
-      $("#haiku").fadeIn(2000).delay(2000).fadeOut(2000)
+      $("#haiku").fadeIn(2000).delay(2000).fadeOut 2000, =>
+        @click = true
     else
       $("#haiku").hide().html("<p>"+@end+"</p>").appendTo(@elem)
-      $("#haiku").fadeIn(3000)
+      $("#haiku").fadeIn 3000, =>
+        @click = true
     
   
   inhaiku: (coord, haiku) ->
@@ -49,10 +54,11 @@ class root.Scene
     inhaiku
 
   next: (coord) ->
-    if @inhaiku(coord, @haikus[0])
-      @haikus = @haikus.slice(1)
-    @render()
-    @say()
+    if @click
+      if @inhaiku(coord, @haikus[0])
+        @haikus = @haikus.slice(1)
+      @render()
+      @say()
 
 
 
