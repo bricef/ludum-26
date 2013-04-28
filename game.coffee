@@ -3,18 +3,19 @@ root = exports ? this
 
 class root.Scene
   constructor: (elem, config) ->
-    @haikus = config.shots
+    @verses = config.verses
+    @items = config.items
+    
     @basepic = config.base
+    
     @start = config.start
     @end = config.end
     @elem = $(elem)
+    
     @click = false
-    @render
-    $('<div id="haiku"><p>'+@start+'</p></div>').appendTo(@elem)
     $('<div id="images" />').appendTo(@elem)
-    $("#haiku").delay(2000).fadeOut 3000, =>
-      if @haikus.length
-        $("#haiku").html("<p>"+@haikus[0].haiku+"</p>").fadeIn 2000, =>
+    $('<div id="haiku"><p>'+@start+'</p></div>').appendTo(@elem).delay(2000).fadeOut 3000, =>
+      $("#haiku").html("<p>"+@verses[0].verse+"</p>").fadeIn 2000, =>
           do @render
           $("#haiku").delay(4000).fadeOut 2000, =>
             @click = true
@@ -23,11 +24,11 @@ class root.Scene
     images = $("#images")
     images.empty()
     $('<img />').attr({id: "base", src: @basepic, class:"disp"}).appendTo(images)
-    if @haikus.length
-      for haiku in @haikus
-        $('<img />').attr({src: haiku.img, class:"disp"})
-          .css("left", haiku.offset.x)
-          .css("top", haiku.offset.y)
+    if @items.length
+      for item in @items
+        $('<img />').attr({src: item.img, class:"disp"})
+          .css("left", item.offset.x)
+          .css("top", item.offset.y)
           .appendTo(images)
   
   say: () ->
@@ -42,19 +43,18 @@ class root.Scene
         @click = true
     
   
-  inhaiku: (coord, haiku) ->
-    console.log coord
-    console.log haiku
-    inhaiku = haiku.offset.x < coord.x \
-    and coord.x < (haiku.offset.x+haiku.size.x) \
-    and haiku.offset.y < coord.y \
-    and coord.y < (haiku.offset.y+haiku.size.y)
-    inhaiku
+  initem: (coord, item) ->
+    initem = item.offset.x < coord.x \
+    and coord.x < (item.offset.x+item.size.x) \
+    and item.offset.y < coord.y \
+    and coord.y < (item.offset.y+item.size.y)
+    initem
 
   next: (coord) ->
     if @click
-      if @inhaiku(coord, @haikus[0])
-        @haikus = @haikus.slice(1)
+      for item in @items
+        if @initem(coord, item)
+          @items = @items.slice(1)
       @render()
       @say()
 

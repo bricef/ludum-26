@@ -41,64 +41,87 @@
       $("#main"),
       {
         base:"/Client/resources/scene-bg.png", 
-        shots: [
+        items: [
           {
-            haiku:"*Sigh* I need to clear the <em>junk</em> out of this room...",
+            id: "trash",
             offset: {x:160, y:160},
             img: "Client/resources/trash.png",
-            size: {x:100, y:110},
+            size: {x:100, y:110}
           },
           {
-            haiku:"I bought you these for your birthday, but you haven't been around <em>to water them</em>.",
+            id: "flowers",
             offset: {x:450, y:90},
             img: "Client/resources/flowers.png",
             size: {x:60, y:90},
           },
           {
-            haiku:"You were <em>the best</em> at everything you did, always fighting to the end.",
+            id : "trophy",
             offset: {x:300, y:110},
             img: "Client/resources/trophy.png",
             size: {x:64, y:64},
           },
           {
-            haiku:"That was how I first met you: blade in still in hand, serving me <em>potato</em> salad.",
+            id: "potato", 
             offset: {x:360, y:140},
             img: "Client/resources/potato.png",
             size: {x: 60, y:40},
           },
           {
-            haiku:"I asked for your number straight away. I will never forget how beautiful you looked <em>dressed up</em> that night we met again.",
+            id: "clothing", 
             offset: {x:0, y:0},
             img: "Client/resources/clothing.png",
             size: {x:80, y:280},
           },
           {
-            haiku:"When we got <em>married</em>, I really believed in what we promised: \"until death do us part.\"",
-            offset: {x:223,y:45},
+            id: "ring",
+            offset: {x:230,y:100},
             img: "Client/resources/ring.png",
             size: {x:32, y:32},
           },
           {
-            haiku:"Lately you began to worry about <em>wrecking</em> what we had. In the end, it was me who butchered our relationship.",
+            id: "wrecking", 
             offset: {x:512, y:200},
             img: "Client/resources/wrecking.png",
             size: {x:100, y:100},
           },
           {
-            haiku:"I can't <em>sleep</em> here any more. I have to get out.",
+            id: "bed", 
             offset: {x:0, y:300},
             img: "Client/resources/bed.png",
             size: {x:600, y:100},
           },
           {
-            haiku:"I'm sorry I'm sorry I'm sorry I'm sorry I'm <em>sorry</em>...",
+            id: "knife", 
             offset: {x:150, y:320},
             img: "Client/resources/finalobject.png",
             size: {x:64, y:64},
           },
         ],
-        start: "Click to start",
-        end: "I miss you.",
+        verses: [
+          {
+            verse:"*Sigh* I need to clear the <em>junk</em> out of this room...",
+            items: [
+              {id: "flowers", score: -1, feedback: "Who cares for this sentimental crap anyway."},
+              {id: "trash", score: 0, feedback: "Well, that looks much cleaner now."}
+            ]
+          },
+          {
+            verse:"I bought you these for your birthday, but you haven't been around much to enjoy them...",
+            items: [
+              {id: "flowers", score: 1, feedback:"So I made sure to send you a bouquet at work."},
+              {id: "clothing", score: -1, feedack: "And you never seemed to like what I did to you while you wore them."}
+            ]
+          },
+        ],
+        start: "This is our story",
+        endings:[
+          "I already look forward to our time together with our new arrival. What a family we'll make!",
+          "With my promotion, we're able to move to a bigger place.",
+          "I'm glad I did that, this room really needed a clean.",
+          "I miss you. Without you, without a job, I'm not sure what's going to happen now",
+          "They'll never find your body."
+        ]
+
       }
     );
 
