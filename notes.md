@@ -174,3 +174,7 @@ http://openclipart.org/detail/170514/keys-by-hatalar205-170514
 
 vacuum
 http://openclipart.org/detail/13321/vacuum-cleaner-upright-by-anonymous
+
+bills
+http://openclipart.org/detail/1187/letters-by-johnny_automatic
+http://openclipart.org/detail/172067/urgent-business-stamp-2-by-merlin2525-172067
