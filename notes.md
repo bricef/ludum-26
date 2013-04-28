@@ -137,3 +137,8 @@ potato
 http://openclipart.org/detail/9136/fast-food-dishes-plate-by-gerald_g
 http://openclipart.org/detail/22370/potato-by-nicubunu
 
+ring
+http://openclipart.org/detail/117241/golden-ring-by-truecryer
+
+trash
+http://openclipart.org/detail/172765/blue-plastic-box-filled-with-paper-by-qubodup-172765
