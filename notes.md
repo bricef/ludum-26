@@ -112,19 +112,24 @@ Highest possible score: +7
 ## Endings
 
 I look forward to our time together with our new arrival. What a family we'll make!
-teddy
+
+* teddy
 
 With my promotion at work, we're able to move to a bigger place.
-housekey
+
+* housekey
 
 I'm glad I did that. This room really needed a clean.
-duster
+
+* vacuum
 
 I miss you. Without you, without a job, I don't know what's going to happen now.
-bills
+
+* bills
 
 I'm sorry I'm sorry I'm sorry I'm sorry I'm sorry I'm sorry I'm sorry 
-knife
+
+* knife
 
 
 ## Image sources
@@ -167,3 +172,5 @@ http://openclipart.org/detail/49009/simple-teddy-bear-with-bowtie-by-gerald_g
 housekey
 http://openclipart.org/detail/170514/keys-by-hatalar205-170514
 
+vacuum
+http://openclipart.org/detail/13321/vacuum-cleaner-upright-by-anonymous
