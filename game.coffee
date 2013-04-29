@@ -51,6 +51,20 @@ class root.Scene
             @clickOn()
 
   finish: () ->
+    @clickOff()
+    screen = $("#bscreen")
+    haiku = $("#haiku")
+    # start by displaying the feedback from the last verse
+    screen.fadeIn(500).delay(3000).delay(2000).delay(500).delay(3000).fadeOut(2000)
+    haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
+      haiku.html('<p class="cbox">'+newverse+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
+        @clickOn()
+        if callback
+          callback()
+    $("#haiku").html('<p class="cbox">'+@verses[0].verse+'</p>')
+
+    # now the feedback has been shown begin the end sequence, with "I can't sleep here".
+    
     # this could probably be cleaner, but whatever
     if @score == 0 # neutral
       end = @endings[2].text
@@ -121,15 +135,6 @@ class root.Scene
             else
               @finish()
 
-#            @showText(verse.items[item.id].feedback, () =>
-#              # when feedback is shown, remove the verse
-#              @verses = @verses.slice(1)
-#              # show the next verse!
-#              if @verses.length
-#                @showText(@verses[0].verse)
-#              else
-#                @finish()
-#            )
           else
             @showText("I'm not ready to cut this out of my life just yet...")
 
