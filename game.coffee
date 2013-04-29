@@ -16,6 +16,7 @@ else
 class root.Scene
   constructor: (elem, config) ->
     @verses = config.verses
+    @verseno = 0
     @items = config.items
     
     @basepic = config.base
@@ -63,7 +64,8 @@ class root.Scene
   
   begin: () ->
     $("#haiku").html('<p class="cbox">'+@start+'</p>').delay(wait_delay).fadeOut fadeout_delay, =>
-      $("#haiku").html('<p class="cbox">'+@verses[0].verse+"</p>").fadeIn fadein_delay, =>
+      $("#haiku").html('<duv class="cbox"><h3>Verse '+(@verseno+1)+'</h3><p>'+
+          @verses[0].verse+"</p></div>").fadeIn fadein_delay, =>
         $("#bscreen").show().delay(wait_delay).fadeOut(fadeout_delay)
         do @render
         $("#haiku").delay(wait_delay).fadeOut fadeout_delay, =>
@@ -106,7 +108,8 @@ class root.Scene
       haikuclass = 'cbox'
       if 'badending' of ending
         haikuclass += ' badending'
-      $('#haiku').delay(500).html('<p class="'+haikuclass+'">'+ending.text+'</p>')
+      console.log 'haiku class '+haikuclass
+      $('#haiku').delay(500).html('<div class="'+haikuclass+'"><h3>Final Verse</h3><p>'+ending.text+'</p></div>')
         .delay(1000).fadeIn(1000).delay(5000).fadeOut 1000, =>
           $("#haiku").html('<p class="cbox credits">'+@credits+'</p>').fadeIn(1000)
       # delay 
@@ -122,7 +125,7 @@ class root.Scene
     # start by displaying the feedback from the last verse
     screen.fadeIn(fadein_delay).delay(wait_delay).delay(fadeout_delay).delay(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay)
     haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
-      haiku.html('<p class="cbox">'+@end.verse+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
+      haiku.html('<div class="cbox"><h3>Verse '+(@verseno+1)+'</h3><p>'+@end.verse+"</p></div>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
         # Now we nuke the event handler on #main and replace it with the terminal handler 
         # yes, I know how ugly this is. Shut up.
         @elem.unbind()
@@ -156,7 +159,7 @@ class root.Scene
     @clickOff()
     screen.fadeIn(fadein_delay).delay(wait_delay).delay(fadeout_delay).delay(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay)
     haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
-      haiku.html('<p class="cbox">'+newverse+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
+      haiku.html('<div class="cbox"><h3>Verse '+(@verseno+1)+'</h3><p>'+newverse+"</p></div>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay, =>
         @clickOn()
         if callback
           callback()
@@ -177,6 +180,7 @@ class root.Scene
             @render()
             # show feedback
             
+            @verseno += 1
             if @verses.length >1
               @showTexts verse.items[item.id].feedback, @verses[1].verse, () =>
                 @verses = @verses.slice(1)
