@@ -103,10 +103,13 @@ class root.Scene
       $('<img />').attr({src: ending.img, class:"disp" ,id:"finalimg"})
           .css("left", ending.offset.x)
           .css("top", ending.offset.y)
+          .css("width", ending.smallsize.x)
+          .css("height", ending.smallsize.y)
           .appendTo(images)
           # grow item to fill page
           .delay(500)
-          .animate({width:"60%", top:"50px"}, 1000).animate({opacity:0.3},1000)
+          .animate({width:ending.bigsize.x, height:ending.bigsize.y, top:"50px"}, 1000)
+          .animate({opacity:0.3},1000)
       $('#bscreen').delay(500).fadeIn(1000)
       # fade in final verse
       haikuclass = 'cbox'
