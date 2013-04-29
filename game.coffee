@@ -112,6 +112,8 @@ class root.Scene
       haikuclass = 'cbox'
       if 'badending' of ending
         haikuclass += ' badending'
+      if 'goodending' of ending
+        haikuclass += ' goodending'
       console.log 'haiku class '+haikuclass
       $('#haiku').delay(500).html('<div class="'+haikuclass+'"><h3>Final Verse</h3><p>'+ending.text+'</p></div>')
         .delay(1000).fadeIn(1000).delay(5000).fadeOut 1000, =>
