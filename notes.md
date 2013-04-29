@@ -125,3 +125,6 @@ http://openclipart.org/detail/13321/vacuum-cleaner-upright-by-anonymous
 bills
 http://openclipart.org/detail/1187/letters-by-johnny_automatic
 http://openclipart.org/detail/172067/urgent-business-stamp-2-by-merlin2525-172067
+
+noose
+http://commons.wikimedia.org/wiki/File:Hangmans_Noose.jpg
