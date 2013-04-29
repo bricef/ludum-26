@@ -51,13 +51,17 @@ class root.Scene
   clickOff: () ->
     @click = false
 
-  render: () ->
+  render: (verseitems) ->
     images = $("#images")
     images.empty()
     $('<img />').attr({id: "base", src: @basepic, class:"disp"}).appendTo(images)
     if @items.length
       for item in @items
-        $('<img />').attr({src: item.img, class:"disp"})
+        itemclass = "disp"
+        if item.id in verseitems
+          itemclass += " clickable"
+        console.log item.id+' class: '+itemclass
+        $('<img />').attr({src: item.img, class:itemclass})
           .css("left", item.offset.x)
           .css("top", item.offset.y)
           .appendTo(images)
@@ -67,7 +71,7 @@ class root.Scene
       $("#haiku").html('<duv class="cbox"><h3>Verse '+(@verseno+1)+'</h3><p>'+
           @verses[0].verse+"</p></div>").fadeIn fadein_delay, =>
         $("#bscreen").show().delay(wait_delay).fadeOut(fadeout_delay)
-        do @render
+        @render(k for k of @verses[0].items)
         $("#haiku").delay(wait_delay).fadeOut fadeout_delay, =>
           @clickOn()
 
@@ -94,13 +98,13 @@ class root.Scene
       # remove bed from pictures, add ending picture to picture stack, remove handcuffs
       @items = (item for item in @items when (item.id isnt bed.id) and (item.id isnt "handcuffs") )
       console.log @items
-      do @render
       ending = @getEnding()
+      @render([ending.item])
       $('<img />').attr({src: ending.img, class:"disp" ,id:"finalimg"})
           .css("left", ending.offset.x)
           .css("top", ending.offset.y)
           .appendTo(images)
-          # grow item to fil page
+          # grow item to fill page
           .delay(500)
           .animate({width:"60%", top:"50px"}, 1000).animate({opacity:0.3},1000)
       $('#bscreen').delay(500).fadeIn(1000)
@@ -177,7 +181,10 @@ class root.Scene
             # remove item from item list
             @items = @items.filter (it) -> it.id isnt item.id
             # re-render the scene with the new item list
-            @render()
+            if @verses.length > 1
+              @render(k for k of @verses[1].items)
+            else
+              @render([@getEnding().item])
             # show feedback
             
             @verseno += 1
