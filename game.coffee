@@ -1,7 +1,7 @@
 
 root = exports ? this
 
-DEBUG = false
+DEBUG = true 
 
 if not DEBUG
   fadein_delay = 500
@@ -14,7 +14,7 @@ else
 
 
 class root.Scene
-  constructor: (elem, config) ->
+  constructor: (elem, score_cb, config) ->
     @verses = config.verses
     @verseno = 0
     @items = config.items
@@ -31,6 +31,8 @@ class root.Scene
     
     @max_score = 7
     @min_score = -7
+
+    @score_cb = score_cb
 
     @click = false
     $('<div id="images" />').appendTo(@elem)
@@ -60,7 +62,7 @@ class root.Scene
         itemclass = "disp"
         if item.id in verseitems
           itemclass += " clickable"
-        console.log item.id+' class: '+itemclass
+        #console.log item.id+' class: '+itemclass
         $('<img />').attr({src: item.img, class:itemclass})
           .css("left", item.offset.x)
           .css("top", item.offset.y)
@@ -145,8 +147,6 @@ class root.Scene
 
   
   showText: (msg, callback) ->
-    # TODO: Should accept multiple messages and display 
-    # them one after the other with a blank background in between.
     @clickOff()
     $("#bscreen").fadeIn(fadein_delay).delay(wait_delay).fadeOut(fadeout_delay/2)
     $("#haiku").hide().html('<p class="cbox">'+msg+"</p>").fadeIn(fadein_delay).delay(wait_delay).fadeOut fadeout_delay/2 , =>
@@ -183,6 +183,7 @@ class root.Scene
           if verse.items[item.id]
             # update score
             @score = @score + verse.items[item.id].score
+            @score_cb(@score)
             # remove item from item list
             @items = @items.filter (it) -> it.id isnt item.id
             # re-render the scene with the new item list
