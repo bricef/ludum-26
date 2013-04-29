@@ -103,8 +103,12 @@ class root.Scene
           .animate({width:"60%", top:"50px"}, 1000).animate({opacity:0.3},1000)
       $('#bscreen').delay(500).fadeIn(1000)
       # fade in final verse
-      $('#haiku').delay(500).html('<p class="cbox">'+ending.text+'</p>').delay(1000).fadeIn(1000).delay(5000).fadeOut 1000, =>
-        $("#haiku").html('<p class="cbox credits">'+@credits+'</p>').fadeIn(1000)
+      haikuclass = 'cbox'
+      if 'badending' of ending
+        haikuclass += ' badending'
+      $('#haiku').delay(500).html('<p class="'+haikuclass+'">'+ending.text+'</p>')
+        .delay(1000).fadeIn(1000).delay(5000).fadeOut 1000, =>
+          $("#haiku").html('<p class="cbox credits">'+@credits+'</p>').fadeIn(1000)
       # delay 
       # show credits
     else
