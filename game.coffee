@@ -19,7 +19,9 @@ class root.Scene
 
     @click = false
     $('<div id="images" />').appendTo(@elem)
+    $('<div id="bscreen" />').appendTo(@elem)
     $('<div id="haiku"></div>').appendTo(@elem)
+    $("#bscreen").hide()
     @begin()
   
   clickOn: () ->
@@ -84,6 +86,19 @@ class root.Scene
     and coord.y < (item.offset.y+item.size.y)
     initem
 
+  showTexts: (feedback, newverse, callback) ->
+    console.log "show texts"
+    screen = $("#bscreen")
+    haiku = $("#haiku")
+    @clickOff()
+    screen.fadeIn(500).delay(3000).delay(2000).delay(500).delay(3000).fadeOut(2000)
+    haiku.html('<p class="cbox">'+feedback+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
+      haiku.html('<p class="cbox">'+newverse+"</p>").fadeIn(500).delay(3000).fadeOut 2000, =>
+        @clickOn()
+        if callback
+          callback()
+
+
   next: (coord) ->
     verse = @verses[0]
     if @click
@@ -99,16 +114,22 @@ class root.Scene
             # re-render the scene with the new item list
             @render()
             # show feedback
+            
+            if @verses.length >1
+              @showTexts verse.items[item.id].feedback, @verses[1].verse, () =>
+                @verses = @verses.slice(1)
+            else
+              @finish()
 
-            @showText(verse.items[item.id].feedback, () =>
-              # when feedback is shown, remove the verse
-              @verses = @verses.slice(1)
-              # show the next verse!
-              if @verses.length
-                @showText(@verses[0].verse)
-              else
-                @finish()
-            )
+#            @showText(verse.items[item.id].feedback, () =>
+#              # when feedback is shown, remove the verse
+#              @verses = @verses.slice(1)
+#              # show the next verse!
+#              if @verses.length
+#                @showText(@verses[0].verse)
+#              else
+#                @finish()
+#            )
           else
             @showText("I wasn't ready to cut this out of my life just yet...")
 
