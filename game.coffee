@@ -99,7 +99,7 @@ class root.Scene
       @items = (item for item in @items when (item.id isnt bed.id) and (item.id isnt "handcuffs") )
       console.log @items
       ending = @getEnding()
-      @render([ending.item])
+      @render([@end.item])
       $('<img />').attr({src: ending.img, class:"disp" ,id:"finalimg"})
           .css("left", ending.offset.x)
           .css("top", ending.offset.y)
@@ -186,7 +186,7 @@ class root.Scene
             if @verses.length > 1
               @render(k for k of @verses[1].items)
             else
-              @render([@getEnding().item])
+              @render([@end.item])
             # show feedback
             
             @verseno += 1
