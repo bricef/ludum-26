@@ -9,13 +9,13 @@ class root.Scene
     @basepic = config.base
     
     @start = config.start
-    @end = config.end
+    @endings = config.endings
     @elem = $(elem)
    
     @score = 0
     
-    @max_score = @items.length * 1
-    @min_score = @items.length * -1
+    @max_score = 7
+    @min_score = -7
 
     @click = false
     $('<div id="images" />').appendTo(@elem)
@@ -42,21 +42,36 @@ class root.Scene
           .appendTo(images)
   
   begin: () ->
-    $("#haiku").html('<p>'+@start+'</p>').delay(2000).fadeOut 3000, =>
-      $("#haiku").html("<p>"+@verses[0].verse+"</p>").fadeIn 2000, =>
+    $("#haiku").html('<p class="cbox">'+@start+'</p>').delay(2000).fadeOut 3000, =>
+      $("#haiku").html('<p class="cbox">'+@verses[0].verse+"</p>").fadeIn 2000, =>
           do @render
           $("#haiku").delay(4000).fadeOut 2000, =>
             @clickOn()
 
   finish: () ->
-    # TODO: sort out endings based on score here.
-    $("#haiku").hide().html("<p>"+@end+"</p>").fadeIn(3000)
+    # this could probably be cleaner, but whatever
+    if @score == 0 # neutral
+      end = @endings[2].text
+      pic = @endings[2].img
+    else if @score < -3 #terrible
+      end = @endings[4].text
+      pic = @endings[4].img
+    else if @score < 0 #bad
+      end = @endings[3].text
+      pic = @endings[3].img
+    else if @score > 3 #great
+      end = @endings[0].text
+      pic = @endings[0].img
+    else if @score > 0 #good
+      end = @endings[1].text
+      pic = @endings[1].img
+    $("#haiku").hide().html('<p class="cbox">'+end+'</p><img src="'+pic+'" />').fadeIn(3000)
   
   showText: (msg, callback) ->
     # TODO: Should accept multiple messages and display 
     # them one after the other with a blank background in between.
     @clickOff()
-    $("#haiku").hide().html("<p>"+msg+"</p>").fadeIn(500).delay(3000).fadeOut 2000 , =>
+    $("#haiku").hide().html('<p class="cbox">'+msg+"</p>").fadeIn(500).delay(3000).fadeOut 2000 , =>
       @clickOn()
       if callback
         callback()
@@ -84,6 +99,7 @@ class root.Scene
             # re-render the scene with the new item list
             @render()
             # show feedback
+
             @showText(verse.items[item.id].feedback, () =>
               # when feedback is shown, remove the verse
               @verses = @verses.slice(1)
