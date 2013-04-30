@@ -128,3 +128,11 @@ http://openclipart.org/detail/172067/urgent-business-stamp-2-by-merlin2525-17206
 
 noose
 http://commons.wikimedia.org/wiki/File:Hangmans_Noose.jpg
+
+## Soundscape
+
+ * [rain and thnder](http://www.freesound.org/people/CGEffex/packs/9827/)
+ * [birds](http://www.freesound.org/people/CGEffex/packs/7710/)
+ * [8 bit?](http://bertuf.org/english/cbasicore.html)
+
+
