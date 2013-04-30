@@ -67,6 +67,7 @@ class root.Scene
           .css("left", item.offset.x)
           .css("top", item.offset.y)
           .appendTo(images)
+    $('<img />').attr({id: "overlay", src: "Client/resources/overlay.png", class:"disp"}).appendTo(images)
   
   begin: () ->
     $("#haiku").html('<p class="cbox">'+@start+'</p>').delay(wait_delay).fadeOut fadeout_delay, =>
