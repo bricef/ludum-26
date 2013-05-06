@@ -1,12 +1,11 @@
-
 root = exports ? this
 
 DEBUG = false
 
 if not DEBUG
-  fadein_delay = 500
-  fadeout_delay = 2000
-  wait_delay = 2000
+  fadein_delay = 700
+  fadeout_delay = 3000
+  wait_delay = 3000
 else
   fadein_delay = 500
   fadeout_delay = 500
